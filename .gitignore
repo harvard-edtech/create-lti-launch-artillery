@@ -1,0 +1,8 @@
+# Ignore node modules
+node_modules/
+
+# Ignore configuration files
+config/
+
+# List of students
+studentAccessTokens.js

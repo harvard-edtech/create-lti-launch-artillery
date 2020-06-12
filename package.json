@@ -1,0 +1,31 @@
+{
+	"name": "batch-launch-link-creator",
+	"version": "1.0.0",
+	"description": "Batch-creates LTI launch links.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/harvard-edtech/batch-launch-link-creator.git"
+	},
+	"keywords": [
+		"Batch",
+		"LTI",
+		"Test"
+	],
+	"author": "Gabe Abrams <gabeabrams@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/harvard-edtech/batch-launch-link-creator/issues"
+	},
+	"homepage": "https://github.com/harvard-edtech/batch-launch-link-creator#readme",
+	"dependencies": {
+		"caccl": "^1.1.22",
+		"fs": "0.0.1-security",
+		"opn": "^6.0.0",
+		"prompt-sync": "^4.2.0"
+	}
+}

@@ -77,7 +77,7 @@ module.exports = async (prompt) => {
 
   const launchLinks = await Promise.all(tasks);
 
-  print.title('Open a Private Window in Safari')
+  print.title('Open a Private Window in Your Browser')
   print.centered('Press enter to continue');
   await prompt();
 
@@ -87,7 +87,7 @@ module.exports = async (prompt) => {
   for (let i = 0; i < launchLinks.length; i++) {
     const link = launchLinks[i];
 
-    opn(link, { background: true, app: 'Safari' }).catch((err) => {
+    opn(link, { background: true, app: 'Google Chrome' }).catch((err) => {
       console.log(err.message);
     });
 

@@ -36,13 +36,32 @@ module.exports = async (prompt) => {
   }
   console.log(`\nUsing: ${appId}\n`);
 
+  // Get range of students
+  print.subtitle(`There are ${tokens.length} students.`);
+  print.subtitle('Which students do you want to test with?');
+  print.centered(`e.g. 1-${tokens.length}`);
+  const range = (await prompt()) || `1-${tokens.length}`;
+  const parts = range.split('-');
+  if (
+    !parts.length === 2
+    || Number.isNaN(Number.parseInt(parts[0]))
+    || Number.isNaN(Number.parseInt(parts[1]))
+  ) {
+    console.log('\nOops! That\'s not a valid student range. Exiting');
+    process.exit(1);
+  }
+  const startIndex = Number.parseInt(parts[0]) - 1;
+  const endIndex = Number.parseInt(parts[1]);
+  console.log(`\nUsing: ${startIndex + 1} to ${endIndex}`);
+
   // Create apis
-  const apiList = tokens.map((accessToken) => {
-    return initCACCL({
-      accessToken,
+  const apiList = [];
+  for (let i = startIndex; i < endIndex; i++) {
+    apiList.push(initCACCL({
       canvasHost,
-    });
-  });
+      accessToken: tokens[i],
+    }));
+  }
 
   print.title('Working...');
 
@@ -67,7 +86,7 @@ module.exports = async (prompt) => {
 
   for (let i = 0; i < 20; i++) {
     const link = launchLinks[i];
-    opn(link, { background: true, app: 'Safari' });
+    opn(link, { background: true, app: 'Safari' }).catch(() => {});
 
     await new Promise((r) => {
       setTimeout(r, 50);

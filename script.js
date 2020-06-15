@@ -87,7 +87,7 @@ module.exports = async (prompt) => {
   for (let i = 0; i < launchLinks.length; i++) {
     const link = launchLinks[i];
 
-    opn(link, { background: true, app: 'Google Chrome' }).catch((err) => {
+    opn(link, { background: true, app: 'Safari' }).catch((err) => {
       console.log(err.message);
     });
 

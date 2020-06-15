@@ -84,7 +84,7 @@ module.exports = async (prompt) => {
   console.log('');
   print.subtitle('Opening Links');
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = startIndex; i < endIndex; i++) {
     const link = launchLinks[i];
     opn(link, { background: true, app: 'Safari' }).catch(() => {});
 

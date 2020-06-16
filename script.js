@@ -1,3 +1,9 @@
+// The name of your browser:
+const BROWSER_NAME = (
+  process.env.BROWSER
+  || 'Safari'
+);
+
 const initCACCL = require('caccl/script');
 const opn = require('opn');
 
@@ -8,38 +14,38 @@ const tokens = require('./studentAccessTokens');
 const print = require('./helpers/print');
 
 module.exports = async (prompt) => {
+  print.title(`Open a Private Window in ${BROWSER_NAME}`);
+  print.centered('Press enter to continue');
+  await prompt();
+
   print.title('Gathering Required Info');
+  console.log('');
 
   // Get the canvasHost
-  print.subtitle('Enter a Canvas Host');
-  print.centered('e.g. canvas.harvard.edu');
+  console.log('Canvas Host: (e.g. canvas.harvard.edu)');
   const canvasHost = (await prompt()) || 'canvas.harvard.edu';
-  console.log(`\nUsing: ${canvasHost}\n`);
+  console.log(`> Using: ${canvasHost}\n`);
   
   // Get courseId
-  print.subtitle('Enter a Canvas Course Id');
-  print.centered('e.g. 72784');
+  console.log('Canvas CourseId: (e.g. 72784)');
   const courseId = Number.parseInt((await prompt()) || '72784');
   if (!courseId || Number.isNaN(courseId)) {
     console.log('\nOops! That\'s not a valid courseId. Exiting');
     process.exit(1);
   }
-  console.log(`\nUsing: ${courseId}\n`);
+  console.log(`> Using: ${courseId}\n`);
 
   // Get the appId
-  print.subtitle('Enter an AppId');
-  print.centered('e.g. 63793');
+  console.log('AppId: (e.g. 63793)');
   const appId = Number.parseInt((await prompt()) || '63793');
   if (!appId || Number.isNaN(appId)) {
     console.log('\nOops! That\'s not a valid appId. Exiting');
     process.exit(1);
   }
-  console.log(`\nUsing: ${appId}\n`);
+  console.log(`> Using: ${appId}\n`);
 
   // Get range of students
-  print.subtitle(`There are ${tokens.length} students.`);
-  print.subtitle('Which students do you want to test with?');
-  print.centered(`e.g. 1-${tokens.length}`);
+  console.log(`Student Range to Test: (e.g. 1-${tokens.length}`);
   const range = (await prompt()) || `1-${tokens.length}`;
   const parts = range.split('-');
   if (
@@ -52,7 +58,7 @@ module.exports = async (prompt) => {
   }
   const startIndex = Number.parseInt(parts[0]) - 1;
   const endIndex = Number.parseInt(parts[1]);
-  console.log(`\nUsing: ${startIndex + 1} to ${endIndex}`);
+  console.log(`> Using: ${startIndex + 1} to ${endIndex}`);
 
   // Create apis
   const apiList = [];
@@ -63,9 +69,8 @@ module.exports = async (prompt) => {
     }));
   }
 
-  print.title('Working...');
-
-  print.centered('Gathering launch links');
+  console.log('');
+  print.title('Preparing...');
 
   // Create launch links
   const tasks = apiList.map((api) => {
@@ -77,17 +82,25 @@ module.exports = async (prompt) => {
 
   const launchLinks = await Promise.all(tasks);
 
-  print.title('Open a Private Window in Your Browser')
-  print.centered('Press enter to continue');
-  await prompt();
-
   console.log('');
-  print.subtitle('Opening Links');
+  print.title('Opening Sessions');
 
   for (let i = 0; i < launchLinks.length; i++) {
     const link = launchLinks[i];
 
-    opn(link, { background: true, app: 'Safari' }).catch((err) => {
+    opn(link, {
+      background: true,
+      app: (
+        ['chrome', 'google chrome'].indexOf(BROWSER_NAME.toLowerCase()) >= 0
+          ? [
+            'google-chrome',
+            '--incognito',
+            `--user-data-dir=~/tmp/foobar${i}`,
+            '--no-first-run'
+          ]
+          : BROWSER_NAME
+      ),
+    }).catch((err) => {
       console.log(err.message);
     });
 

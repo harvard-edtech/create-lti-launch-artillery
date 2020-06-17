@@ -45,7 +45,7 @@ module.exports = async (prompt) => {
   console.log(`> Using: ${appId}\n`);
 
   // Get range of students
-  console.log(`Student Range to Test: (e.g. 1-${tokens.length}`);
+  console.log(`Student Range to Test: (e.g. 1-${tokens.length})`);
   const range = (await prompt()) || `1-${tokens.length}`;
   const parts = range.split('-');
   if (

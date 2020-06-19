@@ -15,6 +15,8 @@ Before you start, you need to get a `launchData.json` file from the test develop
 5. Run `open .`
 6. Drag/drop the `launchData.json` file into the folder that popped up
 
+If you don't have Node installed, visit [nodejs.org](nodejs.org) and install the current version. Don't know if you have Node? Just run `which node` in the terminal and make sure it doesn't say "node not found"
+
 ### Verifying Your Setup:
 
 1. Open Terminal
@@ -22,6 +24,7 @@ Before you start, you need to get a `launchData.json` file from the test develop
 3. Run `npm test`
 4. For the range, enter `1-1` so you're trying with just one user
 5. If an authorization screen pops up, follow instructions to allow Terminal to control your computer
+6. Once you run the test and get a launch as one user, you are ready!
 
 ### Running Tests
 

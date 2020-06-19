@@ -4,5 +4,14 @@ node_modules/
 # Ignore configuration files
 config/
 
-# List of students
-studentAccessTokens.js
+# Launch data
+launchData.js
+launchData.json
+
+# Browser
+browser.js
+browser.json
+
+# Access tokens
+userAccessTokens.js
+userAccessTokens.json

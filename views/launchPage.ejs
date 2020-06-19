@@ -1,0 +1,56 @@
+<head>
+  <!-- Metadata to make scaling work better -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Launch</title>
+
+  <!-- jQuery -->
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+  <!-- Import google font to match Canvas authorization page font -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+  <script type="text/javascript">
+    const data = <%- JSON.stringify(launchBody) %>;
+
+    window.onload = () => {
+      setTimeout(() => {
+        // Create form fields
+        document.getElementById('form').innerHTML = '';
+        // Update the launch form with the new data
+        for (var prop in data) {
+          document.getElementById('form').innerHTML += '<input type="hidden" name="' + prop + '" value="' + data[prop] + '">\n';
+        }
+        // Submit the form
+        document.getElementById('form').submit();
+      }, 100);
+    };
+  </script>
+
+</head>
+
+<body>
+
+  <!-- Page content -->
+  <div class="container">
+
+    <h1>
+      Launching...
+    </h1>
+    <div>
+      If the launch doesn't occur after a few seconds,
+      you might need to disable your popup blocker.
+    </div>
+
+    <form action="<%= launchURL %>" method="POST" id="form">
+      <!-- Form content will be populated after GET -->
+    </form>
+
+  </div><!-- End Container -->
+
+</body>

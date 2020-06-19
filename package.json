@@ -4,8 +4,9 @@
 	"description": "Batch-creates LTI launch links.",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node index.js"
+		"test": "sudo lsof -ti tcp:8098 | xargs kill;npm install;npm start",
+		"start": "node index.js",
+		"build": "node ./helpers/build.js"
 	},
 	"repository": {
 		"type": "git",
@@ -24,8 +25,21 @@
 	"homepage": "https://github.com/harvard-edtech/batch-launch-link-creator#readme",
 	"dependencies": {
 		"caccl": "^1.1.22",
+		"ejs": "^3.1.3",
+		"express": "^4.17.1",
 		"fs": "0.0.1-security",
-		"opn": "^6.0.0",
-		"prompt-sync": "^4.2.0"
+		"node-osascript": "^2.1.0",
+		"oauth-signature": "^1.5.0",
+		"open": "^7.0.4",
+		"prompt-sync": "^4.2.0",
+		"randomstring": "^1.1.5"
+	},
+	"devDependencies": {
+		"eslint": "^7.3.0",
+		"eslint-config-airbnb": "^18.2.0",
+		"eslint-plugin-import": "^2.21.2",
+		"eslint-plugin-jest": "^23.13.2",
+		"eslint-plugin-jsx-a11y": "^6.3.0",
+		"eslint-plugin-react": "^7.20.0"
 	}
 }

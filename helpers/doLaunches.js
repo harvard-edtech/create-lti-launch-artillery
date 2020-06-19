@@ -58,7 +58,7 @@ module.exports = async (app) => {
     browser = require('../browser');
   } catch (err) {
     try {
-      browser = 'safari';
+      browser = 'Safari';
       usingSafari = true;
     } catch (err2) {
       if (err2.message.includes('osascript is not allowed to send keystrokes')) {
@@ -178,7 +178,7 @@ module.exports = async (app) => {
 
     await open(
       url,
-      browser
+      { app: browser }
     );
   }
 };

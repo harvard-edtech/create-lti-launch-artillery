@@ -1,2 +1,3 @@
-# batch-launch-link-creator
-Batch-creates LTI launch links.
+# lti-launch-artillery
+
+Creates lots of LTI launch requests all at once.

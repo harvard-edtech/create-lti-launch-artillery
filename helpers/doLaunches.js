@@ -170,6 +170,7 @@ module.exports = async (app) => {
   if (usingSafari) {
     // Prep Safari
     await runApplescript('tell application "Safari" to activate');
+    await new Promise((r) => { setTimeout(r, 100); });
     await runApplescript('tell application "System Events" to keystroke "N" using command down');
   }
 

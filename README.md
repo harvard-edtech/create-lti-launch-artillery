@@ -15,6 +15,14 @@ Before you start, you need to get a `launchData.json` file from the test develop
 5. Run `open .`
 6. Drag/drop the `launchData.json` file into the folder that popped up
 
+### Verifying Your Setup:
+
+1. Open Terminal
+2. Use `cd` to get _inside of_ the `lti-launch-artillery` folder, wherever you put it
+3. Run `npm test`
+4. For the range, enter `1-1` so you're trying with just one user
+5. If an authorization screen pops up, follow instructions to allow Terminal to control your computer
+
 ### Running Tests
 
 1. Open Terminal

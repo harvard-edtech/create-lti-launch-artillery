@@ -11,8 +11,9 @@ Summary: test developers create a test and then many testers will run that test 
 
 ### Running Tests using the App (Mac Only):
 
-1. Download, unzip, then launch [the LTIArtillery App](https://github.com/harvard-edtech/create-lti-launch-artillery/raw/master/LTIArtillery.zip)
-2. Follow instructions
+1. Download and unzip [the LTIArtillery App](https://github.com/harvard-edtech/create-lti-launch-artillery/raw/master/LTIArtillery.zip)
+2. Right click the app and select "Open"
+3. Follow instructions
 
 ### Running Tests using Terminal:
 

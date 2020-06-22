@@ -1,6 +1,8 @@
 # create-lti-launch-artillery
 
-Summary: test developers create a test and then many testers will run that test all at once, each taking a range of the users. The test developer will end up creating a `launchData.json` file, which must be securely sent to testers.
+First, test creators will create a test, then one or more testers can run the test at once.
+
+<hr>
 
 ## Instructions for Testers:
 
@@ -20,6 +22,8 @@ Summary: test developers create a test and then many testers will run that test 
 1. Open Terminal
 2. Run `npm init lti-launch-artillery`
 3. Follow instructions
+
+<hr>
 
 ## Instructions for Test Creators:
 

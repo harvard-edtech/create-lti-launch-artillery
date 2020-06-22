@@ -15,7 +15,10 @@ if (majorVersion < 10) {
   console.error('Oops! You are running node version ' + majorVersion + '.');
   console.log('LTI Launch Artillery requires Node 10 or higher. Please update your version of Node.');
 } else {
-  var isBuild = (process.argv.indexOf('--new') >= 0);
+  var isBuild = (
+    process.argv.indexOf('--new') >= 0
+    || process.argv.indexOf('-n') >= 0
+  );
 
   if (isBuild) {
     require('./helpers/build.js');

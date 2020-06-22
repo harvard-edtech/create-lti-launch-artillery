@@ -1,4 +1,4 @@
-# lti-launch-artillery
+# create-lti-launch-artillery
 
 Summary: test developers create a test and then many testers will run that test all at once, each taking a range of the users. The test developer will end up creating a `launchData.json` file, which must be securely sent to testers.
 

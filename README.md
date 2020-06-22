@@ -4,7 +4,7 @@ First, test creators will create a test, then one or more testers can run the te
 
 <hr>
 
-## Instructions for Testers:
+# Instructions for Testers:
 
 ### Preparation:
 
@@ -25,7 +25,7 @@ First, test creators will create a test, then one or more testers can run the te
 
 <hr>
 
-## Instructions for Test Creators:
+# Instructions for Test Creators:
 
 To create a new test file, follow these instructions:
 

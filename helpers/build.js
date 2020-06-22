@@ -1,3 +1,4 @@
+const clear = require('clear');
 const prompt = require('./prompt');
 const print = require('./print');
 const fs = require('fs');
@@ -11,24 +12,37 @@ const dropFile = require('./dropFile');
  */
 const run = async () => {
   /* ---------------------------- Intro --------------------------- */
-  console.log('\n\n');
-  print.title('Launch Data Builder');
+  clear();
+  print.title('LTI Launch Artillery | Test Builder');
 
-  console.log('\nLet\'s create/overwrite your launchData.js file.');
-  console.log('Enter to Continue');
+  // Test name
+  console.log('\nWhat do you want to name your test file?');
+  let filename = await prompt('Filename: ', true);
+  if (!filename.endsWith('.json')) {
+    filename = `${filename}.json`;
+  }
+  filename = path.join(
+    process.env.PWD,
+    filename
+  )
+
+  // Rest of intro
+
+  console.log(`\nWe are going to create/overwrite this file:\n${filename}`);
+  console.log('\nPress Enter to Continue');
   await prompt();
 
   /* ------------------------  Canvas Info ------------------------ */
   console.log('');
   print.subtitle('1. Canvas Info');
 
-  const canvasHost = (await prompt('Canvas Host: ')) || undefined;
+  const canvasHost = await prompt('Canvas Host: ', true);
 
   /* ------------------------- Course Info ------------------------ */
   console.log('');
-  print.subtitle('4. Course Info');
+  print.subtitle('2. Course Info');
 
-  const courseId = (await prompt('Course Canvas Id: ')) || undefined;
+  const courseId = await prompt('Course Canvas Id: ', true);
   const courseName = (await prompt('Course Name: ')) || undefined;
   const courseCode = (await prompt('Course Code: ')) || undefined;
 
@@ -43,7 +57,7 @@ const run = async () => {
   print.subtitle('3. App Info');
 
   const appName = (await prompt('App Name: ')) || undefined;
-  const launchURL = (await prompt('Launch URL: ')) || 'https://localhost/launch';
+  const launchURL = await prompt('Launch URL: ', true);
   const consumerKey = (await prompt('Consumer Key: ')) || 'consumer_key';
   const consumerSecret = (await prompt('Consumer Secret: ')) || 'consumer_secret';
 
@@ -56,26 +70,16 @@ const run = async () => {
 
   /* -------------------------- User Info ------------------------- */
   console.log('');
-  print.subtitle('4. App Info');
+  print.subtitle('4. User Info');
 
-  let tokens;
-  while (!tokens) {
-    console.log('Make a "tokens.json" file with an array of Canvas access tokens, one for each user to launch as');
-    await prompt('Press Enter when You\'re Done');
+  console.log('Make a JSON file with an array of Canvas tokens, one for each test user.')
+  await prompt('Press Enter to Continue');
 
-    // Read the tokens
-    try {
-      tokens = JSON.parse(dropFile('tokens.json'))
-    } catch (err) {
-      console.log(`\nOops! An error occurred: ${err.message}`);
-      await prompt('Press Enter to Try Again');
-    }
-  }
+  const tokens = await dropFile('JSON');
 
   /* --------------------------- Working -------------------------- */
-  console.log('');
-  print.subtitle('Working...');
-  console.log('Downloading User Profiles from Canvas');
+  print.title('Working...');
+  console.log('\nDownloading User Profiles from Canvas');
 
   // Create APIs out of each token
   const apis = tokens.map((accessToken) => {
@@ -145,7 +149,7 @@ const run = async () => {
 
   // Save to file
   fs.writeFileSync(
-    path.join(__dirname, '../launchData.json'),
+    filename,
     bodyStr,
     'utf-8'
   );

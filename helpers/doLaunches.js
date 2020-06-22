@@ -40,14 +40,7 @@ module.exports = async (expressApp) => {
   /* ----------------------- Get launch data ---------------------- */
 
   // Get launch data
-  let launchData;
-  try {
-    launchData = JSON.parse(await dropFile('Test'));
-  } catch (err) {
-    console.log(err);
-    console.log('\nOops! Your test file isn\'t formatted correctly. Now exiting.');
-    process.exit(0);
-  }
+  const launchData = await dropFile('Test');
 
   // Extract launch data
   const {

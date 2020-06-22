@@ -4,7 +4,9 @@ const clear = require('clear');
 const fs = require('fs');
 
 /**
- * @param {string} title - title of the file to drop
+ * Drop a JSON file and read it
+ * @author Gabe Abrams
+ * @param {string} title - title of the JSON file to drop
  * @return {string} contents of the file 
  */
 module.exports = async (title) => {
@@ -26,8 +28,9 @@ module.exports = async (title) => {
     // Drop zone
     print.title(`Drop ${title} File Here then Press Enter`);
     print.centered('...or ctrl + c to quit');
-    const filename = prompt();
+    const filename = prompt().replace(/\\ /g, ' ');
     console.log('');
+    console.log('\n', filename);
 
     // Detect error
     if (!filename) {
@@ -35,11 +38,12 @@ module.exports = async (title) => {
     } else {
       // Try to read the file
       try {
-        contents = fs.readFileSync(
+        contents = JSON.parse(fs.readFileSync(
           filename.trim(),
           'utf-8'
-        );
+        ));
       } catch (err) {
+        console.log(err);
         errorMessage = 'Oops! That file is invalid. Please try again.';
       }
     }

@@ -6,18 +6,24 @@ Summary: test developers create a test and then many testers will run that test 
 
 ### Preparation:
 
-1. Get a test file from the test developer.
+1. Get the test file from the test creator
 2. Install [Node.js](nodejs.org)
 
-### Running Tests
+### Running Tests using the App (Mac Only):
+
+1. Download, unzip, then launch [the LTIArtillery App](https://github.com/harvard-edtech/create-lti-launch-artillery/raw/master/LTIArtillery.zip)
+2. Follow instructions
+
+### Running Tests using Terminal:
 
 1. Open Terminal
-2. Type `npm init lti-launch-artillery` and press enter
+2. Run `npm init lti-launch-artillery`
 3. Follow instructions
 
-Note: if an authorization screen pops up, follow instructions to allow Terminal to control your computer
+## Instructions for Test Creators:
 
-## Instructions for Test Developers:
+To create a new test file, follow these instructions:
 
-1. Clone the repo
-2. Run `npm run build` and follow instructions
+1. Open Terminal
+2. Run `npm init lti-launch-artillery --new`
+3. Follow instructions

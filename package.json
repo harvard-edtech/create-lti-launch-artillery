@@ -1,6 +1,6 @@
 {
 	"name": "create-lti-launch-artillery",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Batch-creates LTI launch links.",
 	"main": "index.js",
 	"bin": {

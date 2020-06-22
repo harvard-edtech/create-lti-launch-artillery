@@ -18,6 +18,7 @@ module.exports = (text, isRequired) => {
     }
     if (ret.trim().length === 0 && isRequired) {
       console.log('Oops! This field is required.\n');
+      ret = null;
     }
   }
   return ret;

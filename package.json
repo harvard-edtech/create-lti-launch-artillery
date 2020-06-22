@@ -1,10 +1,13 @@
 {
-	"name": "batch-launch-link-creator",
+	"name": "create-lti-launch-artillery",
 	"version": "1.0.0",
 	"description": "Batch-creates LTI launch links.",
 	"main": "index.js",
+	"bin": {
+		"create-lti-launch-artillery": "./init.js"
+	},
 	"scripts": {
-		"test": "sudo lsof -ti tcp:8098 | xargs kill;npm install;npm start",
+		"test": "clear;echo \"Enter your computer password to continue:\";sudo lsof -ti tcp:8098 | xargs kill;npm install;npm start",
 		"start": "node index.js",
 		"build": "node ./helpers/build.js"
 	},
@@ -25,6 +28,7 @@
 	"homepage": "https://github.com/harvard-edtech/batch-launch-link-creator#readme",
 	"dependencies": {
 		"caccl": "^1.1.22",
+		"clear": "^0.1.0",
 		"ejs": "^3.1.3",
 		"express": "^4.17.1",
 		"fs": "0.0.1-security",

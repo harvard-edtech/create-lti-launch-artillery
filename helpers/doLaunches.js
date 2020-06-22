@@ -8,22 +8,10 @@ const osaScript = require('node-osascript');
 const genLTILaunch = require('./genLTILaunch');
 const prompt = require('./prompt');
 const print = require('./print');
-
-// Import launch data
-const launchData = require('../launchData');
+const dropFile = require('./dropFile');
 
 // Import constants
 const PORT = require('../constants/PORT');
-
-// Extract launch data
-const {
-  course,
-  app,
-  canvasHost,
-} = launchData;
-const launchURL = app.launchURL.trim();
-const consumerKey = app.consumerKey.trim();
-const consumerSecret = app.consumerSecret.trim();
 
 /**
  * Run an applescript
@@ -46,9 +34,31 @@ const runApplescript = async (script) => {
 /**
  * Add routes needed then perform launches
  * @author Gabe Abrams
- * @param {ExpressApp} app - the express app to add routes to
+ * @param {ExpressApp} expressApp - the express app to add routes to
  */
-module.exports = async (app) => {
+module.exports = async (expressApp) => {
+  /* ----------------------- Get launch data ---------------------- */
+
+  // Get launch data
+  let launchData;
+  try {
+    launchData = JSON.parse(await dropFile('Test'));
+  } catch (err) {
+    console.log(err);
+    console.log('\nOops! Your test file isn\'t formatted correctly. Now exiting.');
+    process.exit(0);
+  }
+
+  // Extract launch data
+  const {
+    course,
+    app,
+    canvasHost,
+  } = launchData;
+  const launchURL = app.launchURL.trim();
+  const consumerKey = app.consumerKey.trim();
+  const consumerSecret = app.consumerSecret.trim();
+
   /* ------------------------  Prep Browser ----------------------- */
 
   // Get the browser
@@ -73,8 +83,7 @@ module.exports = async (app) => {
   /* --------------------- Get Range of Users --------------------- */
 
   // Ask the user which users to launch as
-  console.log('\n\n');
-  print.title('LTI Launch Artillery');
+  print.title('LTI Launch Artillery Ready!');
 
   console.log(`\nSpecify a range of users to test with: (e.g. 1-${launchData.users.length})`);
   const range = (await prompt()) || `1-${launchData.users.length}`;
@@ -122,7 +131,7 @@ module.exports = async (app) => {
 
   /* --------------------- Launch Express Path -------------------- */
 
-  app.get('/launch/:index', (req, res) => {
+  expressApp.get('/launch/:index', (req, res) => {
     const index = Number.parseInt(req.params.index) - 1;
 
     // Get user

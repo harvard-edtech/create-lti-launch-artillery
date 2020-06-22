@@ -3,6 +3,7 @@ const print = require('./print');
 const fs = require('fs');
 const path = require('path');
 const initCACCL = require('caccl/script');
+const dropFile = require('./dropFile');
 
 /**
  * Build the launchData using a wizard
@@ -59,12 +60,12 @@ const run = async () => {
 
   let tokens;
   while (!tokens) {
-    console.log('Create a "userAccessTokens.js" file containing an array of tokens');
+    console.log('Make a "tokens.json" file with an array of Canvas access tokens, one for each user to launch as');
     await prompt('Press Enter when You\'re Done');
 
     // Read the tokens
     try {
-      tokens = require('../userAccessTokens.js');
+      tokens = JSON.parse(dropFile('tokens.json'))
     } catch (err) {
       console.log(`\nOops! An error occurred: ${err.message}`);
       await prompt('Press Enter to Try Again');

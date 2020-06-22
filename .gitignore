@@ -4,6 +4,9 @@ node_modules/
 # Ignore configuration files
 config/
 
+# DS_Store
+**/.DS_Store
+
 # Launch data
 launchData.js
 launchData.json

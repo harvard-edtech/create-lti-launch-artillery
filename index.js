@@ -43,7 +43,7 @@ const main = async () => {
       if (err.message.includes('EADDRINUSE')) {
         // Another version of the server is running!
         // eslint-disable-next-line no-console
-        console.log('Oops! Another test script is still running.\n\nSolution:\nUse "npm test" instead of "npm start"\n');
+        console.log('Oops! Another test script is still running.\n\nSolution:\nIn a terminal window, type "sudo lsof -ti tcp:8098 | xargs kill" and press enter\n');
         process.exit(0);
       }
       // eslint-disable-next-line no-console
